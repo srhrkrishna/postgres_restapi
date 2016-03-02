@@ -1,11 +1,13 @@
-db:
-  image: postgres
+postgreshost:
+  image: postgres:9.4
+  environment:
+    - POSTGRES_PASSWORD=postgres
 web:
   build: .
-  command: python manage.py runserver 0.0.0.0:8000
+#   command: python manage.py runserver 0.0.0.0:8000
   volumes:
     - .:/code
   ports:
     - "8000:8000"
   links:
-    - db
+    - postgreshost:postgreshost
